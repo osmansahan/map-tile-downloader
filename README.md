@@ -74,7 +74,7 @@ TileMapDownloader/
 
 2) Local MBTiles (optional; used as local sources)
 
-- Download from: [MBTiles (Google Drive)](https://drive.google.com/drive/folders/1vfLiHNs9gZB0z-aojFhfn_4Gxegh5gqm?usp=drive_link)
+- Download from: [MBTiles (Google Drive)](https://drive.google.com/drive/folders/1vfLiHNs9gZB0z-aojFhfn_4Gxegh5gqm?usp=sharing)
 - Place the `.mbtiles` files into the `mbtiles/` folder:
 
 ```
@@ -140,7 +140,7 @@ pip install -r requirements.txt
 - Download GeoCoordinate data and put into `geocoordinate_data/`:
   - [GeoCoordinate Data (Google Drive)](https://drive.google.com/drive/folders/1OgrhqSFaPmRj3H0P65lSTnonToGSjEMP?usp=sharing)
 - (Optional) Download MBTiles and put into `mbtiles/`:
-  - [MBTiles (Google Drive)](https://drive.google.com/drive/folders/1vfLiHNs9gZB0z-aojFhfn_4Gxegh5gqm?usp=drive_link)
+  - [MBTiles (Google Drive)]([https://drive.google.com/drive/folders/1vfLiHNs9gZB0z-aojFhfn_4Gxegh5gqm?usp=drive_link](https://drive.google.com/drive/folders/1vfLiHNs9gZB0z-aojFhfn_4Gxegh5gqm?usp=sharing))
 
 3) Verify GeoCoordinate data is visible
 
