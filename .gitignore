@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (keep structure, ignore content)
+outputs/*
+!outputs/.gitkeep
+map_tiles/*
+!map_tiles/.gitkeep
+geocoordinate_data/*
+!geocoordinate_data/.gitkeep
+mbtiles/*
+!mbtiles/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+*.cache
+.pytest_cache/
+
+# Temporary files
+*.tmp
+temp/
+
+# Large data and archives
+*.mbtiles
+*.parquet
+*.fgb
+src.rar

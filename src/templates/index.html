@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Map Viewer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:,">
+
+    <script src='https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css' rel='stylesheet' />
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+    <link rel="stylesheet" href="/static/assets/css/styles.css">
+</head>
+
+<body>
+    <div id="map"></div>
+    
+    <button class="toggle-ui-btn" id="toggleUIBtn" onclick="toggleUI()">Hide Tools</button>
+    
+    <div class="control-panel" id="controlPanel">
+        <div class="control-header">
+            <h3>Map Controls</h3>
+            <span class="control-toggle-btn" onclick="toggleControlPanel()">−</span>
+        </div>
+        
+        <div class="control-content">
+            <div class="control-group">
+                <label for="regionSelect">Region</label>
+                <select id="regionSelect">
+                    <option value="">Select region...</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="serverSelect">Map Style</label>
+                <select id="serverSelect">
+                    <option value="">Select a region first...</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <button id="loadMapBtn" class="load-map-btn" disabled>Load Map</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer-control" id="layerControl">
+        <div class="layer-header">
+            <span>Layers</span>
+            <span class="layer-toggle-btn" onclick="toggleLayerControl()">−</span>
+        </div>
+        
+        <div class="layer-buttons">
+            <button class="layer-btn" onclick="resetLayerOrder()" title="Reset to original layer order">Reset Order</button>
+            <button class="layer-btn" onclick="window.UIActions && UIActions.resetLayerColors && UIActions.resetLayerColors()" title="Reset colors to defaults">Reset Colors</button>
+            <button class="layer-btn" onclick="showAllLayers()" title="Show all layers">Show All</button>
+        </div>
+        
+        <div id="layerList"></div>
+    </div>
+
+    <div class="info-box" id="infoBox">
+        <strong>Region:</strong> <span id="currentRegion">-</span><br>
+        <strong>Style:</strong> <span id="currentServer">-</span><br>
+        <strong>Type:</strong> <span id="currentServerType">-</span><br>
+        <strong>Zoom:</strong> <span id="currentZoom">-</span> / <span id="maxZoom">-</span><br>
+        <div id="tileStatus" style="margin-top: 5px; font-size: 10px; font-style: italic;"></div>
+    </div>
+
+    <script>
+        // Initialize core variables to prevent null reference errors
+        window.map = null;
+        window.maplibreMap = null;
+        window.currentTileLayer = null;
+        window.serverTypes = {
+            'CartoDB_Light': 'raster',
+            'CartoDB_Dark': 'raster',
+            'Stamen_Terrain': 'raster',
+            'Stamen_Watercolor': 'raster',
+            'OpenMapTiles_Vector': 'vector'
+        };
+        console.log('Core variables initialized');
+    </script>
+    
+    <script src="/static/assets/js/uiController.js?v=1" 
+            onerror="console.error('Failed to load uiController.js')" 
+            onload="console.log('uiController.js loaded successfully')">
+    </script>
+    
+    <script type="module" src="/static/assets/js/mapLoader.js?v=1"
+            onerror="console.error('Failed to load mapLoader.js')"
+            onload="console.log('mapLoader.js loaded successfully')">
+    </script>
+    
+    <script>
+        function toggleUI() {
+            const controlPanel = document.getElementById('controlPanel');
+            const layerControl = document.getElementById('layerControl');
+            const infoBox = document.getElementById('infoBox');
+            const toggleBtn = document.getElementById('toggleUIBtn');
+            const body = document.body;
+            const isHidden = body.classList.contains('ui-hidden');
+
+            if (isHidden) {
+                body.classList.remove('ui-hidden');
+                controlPanel.style.display = 'block';
+                layerControl.style.display = 'block';
+                if (infoBox && infoBox.getAttribute('data-has-content') === '1') {
+                    infoBox.style.display = 'block';
+                }
+                toggleBtn.textContent = 'Hide Tools';
+            } else {
+                body.classList.add('ui-hidden');
+                controlPanel.style.display = 'none';
+                layerControl.style.display = 'none';
+                if (infoBox) infoBox.style.display = 'none';
+                toggleBtn.textContent = 'Show Tools';
+            }
+        }
+
+        function toggleControlPanel() {
+            const content = document.querySelector('.control-content');
+            const toggleBtn = document.querySelector('.control-toggle-btn');
+            const willShow = content.style.display === 'none';
+            content.style.display = willShow ? 'block' : 'none';
+            toggleBtn.textContent = willShow ? '−' : '+';
+        }
+
+        function toggleLayerControl() {
+            const layerList = document.getElementById('layerList');
+            const toggleBtn = document.querySelector('.layer-toggle-btn');
+            const willShow = layerList.style.display === 'none';
+            layerList.style.display = willShow ? 'block' : 'none';
+            toggleBtn.textContent = willShow ? '−' : '+';
+        }
+
+        // Delegate action buttons to UIActions to avoid recursive shadowing
+        function resetLayerOrder() { window.UIActions && window.UIActions.resetLayerOrder && window.UIActions.resetLayerOrder(); }
+        function showAllLayers() { window.UIActions && window.UIActions.showAllLayers && window.UIActions.showAllLayers(); }
+        function hideAllLayers() { window.UIActions && window.UIActions.hideAllLayers && window.UIActions.hideAllLayers(); }
+        function fitMapToBounds() { window.UIActions && window.UIActions.fitMapToBounds && window.UIActions.fitMapToBounds(); }
+    </script>
+</body>
+</html>

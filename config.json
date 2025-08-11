@@ -1,0 +1,124 @@
+{
+  "regions": {
+    "qatar": {
+      "bbox": [50.75, 24.48, 51.64, 26.15],
+      "min_zoom": 10,
+      "max_zoom": 12,
+      "description": "Qatar region"
+    },
+    "ankara": {
+      "bbox": [32.5, 39.5, 33.0, 40.0],
+      "min_zoom": 10,
+      "max_zoom": 12,
+      "description": "Ankara region"
+    },
+    "istanbul": {
+      "bbox": [28.5, 40.8, 29.5, 41.2],
+      "min_zoom": 10,
+      "max_zoom": 12,
+      "description": "Istanbul region"
+    },
+    "trabzon": {
+      "bbox": [39.4, 40.8, 40.0, 41.2],
+      "min_zoom": 8,
+      "max_zoom": 9,
+      "description": "Trabzon region"
+    },
+    "bursa": {
+      "bbox": [28.8, 40.0, 29.4, 40.4],
+      "min_zoom": 8,
+      "max_zoom": 9,
+      "description": "Bursa region"
+    },
+    "turkiye": {
+      "bbox": [25.5, 35.5, 45.0, 42.5],
+      "min_zoom": 10,
+      "max_zoom": 13,
+      "description": "Turkey country region"
+    },
+    "izmir": {
+      "bbox": [27.0, 38.3, 27.5, 38.6],
+      "min_zoom": 10,
+      "max_zoom": 12,
+      "description": "Izmir region"
+    }
+    ,
+    "erzurum": {
+      "bbox": [40.0, 39.2, 42.1, 41.7],
+      "min_zoom": 3,
+      "max_zoom": 14,
+      "description": "Erzurum region"
+    }
+  },
+  "servers": [
+    {
+      "name": "OpenMapTiles_Vector",
+      "type": "http",
+      "url": "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=R4oaQSxILSHOiCwuJOZx",
+      "headers": {"User-Agent": "Multi-Tile-Downloader/1.0"},
+      "tile_type": "vector"
+    },
+    {
+      "name": "CartoDB_Light",
+      "type": "http",
+      "url": "https://cartodb-basemaps-b.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+      "headers": {"User-Agent": "Multi-Tile-Downloader/1.0"},
+      "tile_type": "raster"
+    },
+    {
+      "name": "CartoDB_Dark",
+      "type": "http",
+      "url": "https://cartodb-basemaps-b.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
+      "headers": {"User-Agent": "Multi-Tile-Downloader/1.0"},
+      "tile_type": "raster"
+    },
+    {
+      "name": "Local_OSM_Turkey",
+      "type": "local",
+      "path": "mbtiles/osm-2020-02-10-v3.11_europe_turkey.mbtiles",
+      "source_type": "mbtiles",
+      "tile_type": "vector",
+      "bounds": [25.6071, 35.717, 44.9, 42.397],
+      "min_zoom": 0,
+      "max_zoom": 14,
+      "description": "Local OSM Turkey MBTiles"
+    },
+    {
+      "name": "Local_OSM_Africa",
+      "type": "local",
+      "path": "mbtiles/osm-2020-02-10-v3.11_africa.mbtiles",
+      "source_type": "mbtiles",
+      "tile_type": "vector",
+      "bounds": [-18.0, -35.0, 52.0, 38.0],
+      "min_zoom": 0,
+      "max_zoom": 14,
+      "description": "Local OSM Africa MBTiles"
+    },
+    {
+      "name": "Local_OSM_South_America",
+      "type": "local",
+      "path": "mbtiles/osm-2020-02-10-v3.11_south-america.mbtiles",
+      "source_type": "mbtiles",
+      "tile_type": "vector",
+      "bounds": [-92.0, -56.0, -34.0, 13.0],
+      "min_zoom": 0,
+      "max_zoom": 14,
+      "description": "Local OSM South America MBTiles"
+    },
+    {
+      "name": "Local_Satellite_Turkey",
+      "type": "local",
+      "path": "mbtiles/satellite-2017-11-02_europe_turkey.mbtiles",
+      "source_type": "mbtiles",
+      "tile_type": "raster",
+      "bounds": [25.6071, 35.717, 44.9, 42.397],
+      "min_zoom": 0,
+      "max_zoom": 13,
+      "description": "Local Satellite Turkey MBTiles"
+    }
+  ],
+  "output_dir": "map_tiles",
+  "max_workers_per_server": 15,
+  "retry_attempts": 3,
+  "timeout": 30
+} 
