@@ -2,9 +2,16 @@ import concurrent.futures
 import os
 import sys
 import time
+from pathlib import Path
 from typing import Dict, List, Tuple
 
 import requests
+
+# Ensure 'src' directory is on sys.path when running this script directly
+_current_file = Path(__file__).resolve()
+_src_dir = _current_file.parents[1]
+if str(_src_dir) not in [str(p) for p in sys.path]:
+    sys.path.insert(0, str(_src_dir))
 
 from services.config_service import ConfigService
 from models.tile_server import TileServer

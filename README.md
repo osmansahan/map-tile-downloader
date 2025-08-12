@@ -86,6 +86,10 @@ TileMapDownloader/
 
 Why manual placement? Large data cannot be committed to GitHub; users must download and place folders locally.
 
+Notes about data formats
+- Parquet dosyaları çalışma zamanı için yeterlidir. `geocoordinate_data/` altında `.parquet` dosyaları ve `metadata_original.json` varsa uygulama çalışır. GeoJSON/FlatGeobuf yalnızca Parquet üretmek istiyorsanız gereklidir (opsiyonel).
+- Yükleyici öncelikle Parquet'i kullanır; Parquet yoksa FlatGeobuf (`countries.fgb`) veya GeoJSON'a düşer.
+
 ## Configuration (config.json)
 
 The `config.json` controls regions, servers and output. Example (shortened):
@@ -158,6 +162,8 @@ PY
 4) (Optional) Check which servers are healthy for your network
 
 ```bash
+# Komutu proje kökünde çalıştırın.
+# Scriptler kendi kendine 'src' yolunu ekler; ekstra PYTHONPATH gerekmez.
 python src/scripts/check_servers.py
 ```
 
@@ -202,6 +208,14 @@ Downloaded tiles are saved under `map_tiles/<region>/<raster|vector>/<server>/<z
 - Empty tiles are not saved as valid; the downloader re-tries or falls back to another server.
 - If country-level lookups fail, ensure `geocoordinate_data/metadata_original.json` exists and that at least one of `countries.parquet` or `countries.fgb` is present.
 - For MBTiles sources, make sure requested bbox intersects the MBTiles bounds defined in `config.json`.
+
+Script execution tips (Windows/Linux/Mac)
+- Komutları her zaman proje kökünden (`TileMapDownloader/`) çalıştırın.
+- `src/scripts/` altındaki yardımcı scriptler self-bootstrapping yapar; `python src/scripts/check_servers.py` şeklinde doğrudan çalıştırabilirsiniz.
+- Yine de `ModuleNotFoundError` görürseniz, doğru dizinde olup olmadığınızı doğrulamak için modül yolunu kontrol edin:
+  ```bash
+  python -c "import sys, pprint; pprint.pprint(sys.path)"
+  ```
 
 ## License
 
