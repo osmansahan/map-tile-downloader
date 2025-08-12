@@ -87,8 +87,8 @@ TileMapDownloader/
 Why manual placement? Large data cannot be committed to GitHub; users must download and place folders locally.
 
 Notes about data formats
-- Parquet dosyaları çalışma zamanı için yeterlidir. `geocoordinate_data/` altında `.parquet` dosyaları ve `metadata_original.json` varsa uygulama çalışır. GeoJSON/FlatGeobuf yalnızca Parquet üretmek istiyorsanız gereklidir (opsiyonel).
-- Yükleyici öncelikle Parquet'i kullanır; Parquet yoksa FlatGeobuf (`countries.fgb`) veya GeoJSON'a düşer.
+- Parquet files are sufficient for runtime. If `geocoordinate_data/` contains the `.parquet` files and `metadata_original.json`, the app will work. GeoJSON/FlatGeobuf are optional and only needed if you plan to regenerate Parquet.
+- The loader prefers Parquet; if it’s missing, it falls back to FlatGeobuf (`countries.fgb`) or GeoJSON.
 
 ## Configuration (config.json)
 
@@ -162,8 +162,8 @@ PY
 4) (Optional) Check which servers are healthy for your network
 
 ```bash
-# Komutu proje kökünde çalıştırın.
-# Scriptler kendi kendine 'src' yolunu ekler; ekstra PYTHONPATH gerekmez.
+# Run this from the project root.
+# Scripts are self-bootstrapping; no extra PYTHONPATH is needed.
 python src/scripts/check_servers.py
 ```
 
@@ -210,9 +210,9 @@ Downloaded tiles are saved under `map_tiles/<region>/<raster|vector>/<server>/<z
 - For MBTiles sources, make sure requested bbox intersects the MBTiles bounds defined in `config.json`.
 
 Script execution tips (Windows/Linux/Mac)
-- Komutları her zaman proje kökünden (`TileMapDownloader/`) çalıştırın.
-- `src/scripts/` altındaki yardımcı scriptler self-bootstrapping yapar; `python src/scripts/check_servers.py` şeklinde doğrudan çalıştırabilirsiniz.
-- Yine de `ModuleNotFoundError` görürseniz, doğru dizinde olup olmadığınızı doğrulamak için modül yolunu kontrol edin:
+- Always run commands from the project root (`TileMapDownloader/`).
+- Helper scripts under `src/scripts/` are self-bootstrapping; you can run them directly like `python src/scripts/check_servers.py`.
+- If you still see `ModuleNotFoundError`, verify you’re in the project root by inspecting the module path:
   ```bash
   python -c "import sys, pprint; pprint.pprint(sys.path)"
   ```
