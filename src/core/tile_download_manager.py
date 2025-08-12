@@ -841,7 +841,7 @@ class TileDownloadManager:
         parser.add_argument('--bbox', nargs=4, type=float, metavar=('min_lon', 'min_lat', 'max_lon', 'max_lat'), 
                            help='Custom BBOX (lon/lat). WARNING: BBOX must intersect selected sources! See --list-sources')
         parser.add_argument('--min-zoom', type=int, default=10, help='Minimum zoom level (default: 10)')
-        parser.add_argument('--max-zoom', type=int, default=15, help='Maximum zoom level (default: 15)')
+        parser.add_argument('--max-zoom', type=int, default=12, help='Maximum zoom level (default: 12)')
         # polygon-mode/mask-raster removed; arguments no longer supported
         parser.add_argument('--interactive', action='store_true', help='Start interactive download wizard (step-by-step)')
         

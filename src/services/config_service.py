@@ -125,7 +125,7 @@ class ConfigService(IConfigLoader):
             name=region_name,
             bbox=region_data['bbox'],
             min_zoom=region_data.get('min_zoom', 10),
-            max_zoom=region_data.get('max_zoom', 15),
+            max_zoom=region_data.get('max_zoom', 12),
             description=region_data.get('description', '')
         ) 
 
