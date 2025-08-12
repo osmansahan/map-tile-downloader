@@ -173,7 +173,7 @@ Examples:
 
 ```bash
 # Download for a named region in config.json using online servers
-python src/tile_downloader.py --region istanbul --servers "CartoDB_Light,OpenMapTiles_Vector"
+python src\tile_downloader.py --region istanbul --servers "CartoDB_Light,OpenMapTiles_Vector" --max-zoom 12
 
 # Download by bbox
 python src/tile_downloader.py --bbox 28.5 40.8 29.5 41.2 --min-zoom 10 --max-zoom 12 --servers "CartoDB_Light"
